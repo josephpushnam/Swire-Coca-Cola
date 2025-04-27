@@ -12,6 +12,7 @@ To address this problem, I developed a predictive machine learning model using a
 - Cleaning a dataset of approximately **7,000 customer records** and removing **over 20 redundant or irrelevant fields**.
 - Encoding **5 categorical variables** into numerical formats.
 - Engineering a binary target variable based on the **400-gallon** cutoff.
+- **Creating new features** by pivoting the `ORDER_TYPE` column into **separate frequency columns** for each customer, allowing the model to learn different ordering behaviors (e.g., delivery vs. pickup orders).
 - Handling severe class imbalance with a **scale_pos_weight of 20** during model training.
 - Extracting feature importances and identifying the **Top 10 key drivers** influencing customer performance.
 - Exporting a ranked list of top-predicted high performers, representing **approximately the top 10%** of customers by likelihood.
@@ -21,9 +22,11 @@ To address this problem, I developed a predictive machine learning model using a
 ## 🙋‍♂️ My Contribution
 I independently led the full lifecycle of the project, contributing:
 - Data preprocessing and cleaning of **7,000+ records**.
-- Feature engineering and target creation based on clear business rules.
+- Advanced feature engineering, including:
+  - Creating a **pivoted ORDER_TYPE matrix** to capture the number of deliveries, pickups, and other order types per customer.
+  - Adding new columns that enriched customer profiles beyond what was originally provided.
 - Training and tuning an XGBoost Classifier with appropriate imbalance correction.
-- Model interpretability via feature importance analysis, highlighting key variables such as **average gallons ordered**, **order frequency**, and **customer tenure**.
+- Model interpretability via feature importance analysis, highlighting key variables such as **total gallons ordered**, **order frequency**, and **customer tenure**.
 - Exporting actionable customer predictions to CSV files for business use.
 - Structuring and documenting the notebook with **over 20 well-commented code cells** for clarity and reproducibility.
 
@@ -41,12 +44,13 @@ The model provides a scalable way to drive business outcomes by:
 ## ⚙️ Difficulties Encountered
 The main technical difficulty was the extreme class imbalance, where high performers made up only **~15%** of the dataset. Standard models heavily favored the majority class.  
 I addressed this by setting the `scale_pos_weight` parameter to **20** in XGBoost, which improved the model's ability to correctly identify minority class instances while balancing precision and recall.  
-Iterative experimentation with probability thresholds was also necessary to optimize business actionability.
+Additional challenges included ensuring the newly engineered `ORDER_TYPE` features did not introduce data leakage or multicollinearity.
 
 ---
 
 ## 📚 What I Learned
 Key learnings from this project include:
+- The critical role of **feature engineering** in improving predictive model performance.
 - Practical application of machine learning models to real-world class imbalance problems.
 - Feature selection and interpretation, with a focus on variables that drive tangible business outcomes.
 - Understanding the trade-offs between precision and recall in business settings where false positives and false negatives have asymmetric costs.
@@ -64,7 +68,6 @@ To replicate the analysis:
 4. Review feature importance plots and exported prediction files for actionable insights.
 
 ---
-
 
 # 💻 Tech Stack:
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white) ![NumPy](https://img.shields.io/badge/numpy-%23013243.svg?style=for-the-badge&logo=numpy&logoColor=white) ![Keras](https://img.shields.io/badge/Keras-%23D00000.svg?style=for-the-badge&logo=Keras&logoColor=white) ![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
